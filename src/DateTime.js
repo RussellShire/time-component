@@ -1,6 +1,18 @@
 import React from "react";
 
 class DateTime extends React.Component {
+    date(){
+        return <p>this is a date</p>
+    }
+    
+    time(){
+        return <p>this is a time</p>
+    }
+
+    dateTime(){
+        return <p>this is a date and time</p>
+    }
+
     render(){
 
     let validated = true
@@ -17,9 +29,9 @@ class DateTime extends React.Component {
         <p>Valid input: {JSON.stringify(validated)}</p>
 
         {validated === false && 'incorrect input'}
-        {this.props.dateTimeFlag === "date" && validated? 'this is a date' : ''}
-        {this.props.dateTimeFlag === "time" && validated? 'this is a time' : ''}
-        {this.props.dateTimeFlag === "dateTime"&& validated? 'this is a date and time': ''}
+        {this.props.dateTimeFlag === "date" && validated? this.date() : ''}
+        {this.props.dateTimeFlag === "time" && validated? this.time() : ''}
+        {this.props.dateTimeFlag === "dateTime"&& validated? this.dateTime() : ''}
     </>
     );
   }
