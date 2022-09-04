@@ -1,3 +1,9 @@
+A component in React that uses class component.
+
+Takes in a date and a flag as props and returns a date, time or date and time depending on the flag.
+
+This is a simple component that could be used across an app to standardise date returns.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

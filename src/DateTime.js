@@ -17,15 +17,24 @@ class DateTime extends React.Component {
     render(){
 
     let validated = true
+    const errorMessage = []
     const d = new Date(this.props.dateTime)
-   
+
     if(this.props.dateTimeFlag !== "date" && this.props.dateTimeFlag !== "time" && this.props.dateTimeFlag !== "dateTime"){
         validated = false;
+        errorMessage.push('Incorrect flag, please choose date, time or dateTime')
     }  
+
+    if(isNaN(d.getTime())){
+        validated = false;
+        errorMessage.push('Incorrect date format')
+    }
+    console.log(validated)
      
     return (
         <>
-            {validated === false && 'incorrect input'}
+            {/* {d.getTime()} */}
+            {validated === false && errorMessage}
             {this.props.dateTimeFlag === "date" && validated? this.date(d) : ''}
             {this.props.dateTimeFlag === "time" && validated? this.time(d) : ''}
             {this.props.dateTimeFlag === "dateTime"&& validated? this.dateTime(d) : ''}

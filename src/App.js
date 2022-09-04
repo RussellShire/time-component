@@ -7,7 +7,6 @@ class App extends React.Component {
   const flag = 'time'
   return (
     <div>
-      <h1>I'm the app</h1>
       <DateTime dateTime={dateTime} dateTimeFlag={flag}/>
     </div>
     );
