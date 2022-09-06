@@ -1,43 +1,35 @@
 import React from "react";
 
 class DateTime extends React.Component {
-   
-    date(d){
-        return d.toLocaleDateString("en-GB")
-    }
-    
-    time(d){
-        return d.toLocaleTimeString()
-    }
-
-    dateTime(d){
-        return d.toLocaleDateString("en-GB") + " at " + d.toLocaleTimeString()
-    }
-
     render(){
 
-    let validated = true
-    const errorMessage = []
-    const d = new Date(this.props.dateTime)
+    const convertDate = () => {
+        const d = new Date(this.props.dateTime)
 
-    if(this.props.dateTimeFlag !== "date" && this.props.dateTimeFlag !== "time" && this.props.dateTimeFlag !== "dateTime"){
-        validated = false;
-        errorMessage.push('Incorrect flag, please choose date, time or dateTime')
-    }  
+        if(this.props.dateTimeFlag !== "date" && this.props.dateTimeFlag !== "time" && this.props.dateTimeFlag !== "dateTime"){
+            throw new Error('use the correct flag names please: data, time or dateTime.') 
+        }  
 
-    if(isNaN(d.getTime())){
-        validated = false;
-        errorMessage.push('Incorrect date format')
+        if(isNaN(d.getTime())){
+            throw new Error('use correct date format. Ideally ISO 8601 format (YYYY-MM-DDTHH:mm:ss.sssZ) to ensure compatibility across browsers')
+        
+        }
+        return d
     }
-    console.log(validated)
-     
+
+    try {
+        convertDate()    
+    } catch (e) {
+        console.error(e);
+    }
+    
+    const d = convertDate()
+
     return (
         <>
-            {/* {d.getTime()} */}
-            {validated === false && errorMessage}
-            {this.props.dateTimeFlag === "date" && validated? this.date(d) : ''}
-            {this.props.dateTimeFlag === "time" && validated? this.time(d) : ''}
-            {this.props.dateTimeFlag === "dateTime"&& validated? this.dateTime(d) : ''}
+            {this.props.dateTimeFlag === "date" && d.toLocaleDateString("en-GB")}
+            {this.props.dateTimeFlag === "time" && d.toLocaleTimeString()}
+            {this.props.dateTimeFlag === "dateTime"&& d.toLocaleDateString("en-GB") + " at " + d.toLocaleTimeString()}
         </>
     );
   }

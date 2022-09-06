@@ -3,8 +3,10 @@ import DateTime from "./DateTime";
 
 class App extends React.Component {
   render(){
-  const dateTime = '20:30 31 August 2022'
-  const flag = 'time'
+
+    const dateTime = '31 aug 2022'
+    const flag = 'date'
+
   return (
     <div>
       <DateTime dateTime={dateTime} dateTimeFlag={flag}/>
